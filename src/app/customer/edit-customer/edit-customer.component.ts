@@ -9,12 +9,12 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { findIndex } from 'lodash-es';
 
 @Component({
-  selector: 'add-customer',
-  templateUrl: './add-customer.template.html',
-  styleUrls: ['./add-customer.component.css']
+  selector: 'edit-customer',
+  templateUrl: './edit-customer.template.html',
+  styleUrls: ['./edit-customer.component.css']
 })
 
-export class AddCustomerComponent implements OnInit {
+export class EditCustomerComponent implements OnInit {
   product: any = { colors: [] };
   customer:any = [];
   disableButton = false;
@@ -67,9 +67,36 @@ export class AddCustomerComponent implements OnInit {
     if (this.product.id) {
       this.type = 'edit';
     }
+    if(this.product.id){
+      this.getEditedData()
+    }
   }
 
+  getEditedData() {
+    this.loading = true;
+    return new Promise((resolve, reject) => {
+      this.customerService.getSingleCustomer(this.product.id).subscribe((res: any) => {
+        if (res.status == 200 && res.data) {
+          this.customer = res.data
+          this.customer.customerImageUrlExisting = this.customer.passport_photo
+          this.customer.propertyTaxtReceptImageUrlExisting = this.customer.property_tax_receipt
+          this.customer.residentialImageUrlExisting = this.customer.residential_latest_bill
+          this.customer.aadharImageUrlExisting = this.customer.aadhar_card
+          this.customer.pancardImageUrlExisting = this.customer.pan_card
+          this.customer.birthdate = new Date(this.customer.birthdate)
 
+        }else if(res.status == 400){
+          this._toastMessageService.alert("error",res.data.msg);
+        }
+        this.loading = false;
+        return resolve(true);
+      }, (error) => {
+        this.loading = false;
+        this.commonHelper.showError(error);
+        return resolve(false);
+      })
+    });
+  }
   onSelectFile(event) {
     if (event.target.files && event.target.files[0]) {
       var filesAmount = event.target.files.length;
@@ -217,9 +244,9 @@ export class AddCustomerComponent implements OnInit {
     }
     data.append("body", JSON.stringify(params));
 
-    this.customerService.addCustomer(data).subscribe((res: any) => {
+    this.customerService.updateCustomer(this.product.id,data).subscribe((res: any) => {
       if (res.status == 200 && res.data) {
-        this._toastMessageService.alert("success", "Customer added successfully.");
+        this._toastMessageService.alert("success", "Customer Updated successfully.");
         this.router.navigate(['/customer']);
       }
       this.loading = false;

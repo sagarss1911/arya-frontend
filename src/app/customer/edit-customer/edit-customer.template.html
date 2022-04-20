@@ -138,7 +138,11 @@
                   <div>
                     <label>Photo</label>
                   </div>
-                  <input #customerImageFile type="file" (change)="onCLUpload($event)" accept="image/*,application/pdf" />
+
+                  <div class="uploaded-file-block" *ngIf="customer.customerImageUrlExisting">
+                    <a href="{{customer.customerImageUrlExisting}}" target="_blank">Click To View</a>
+                  </div>
+                  <input #customerImageFile type="file" (change)="onCLUpload($event)" accept="image/*" />
                 </div>
               </div>
 
@@ -147,8 +151,10 @@
                   <div>
                     <label>Pancard</label>
                   </div>
-
-                  <input #pancardImageFile type="file" (change)="onPanCLUpload($event)" accept="image/*,application/pdf" />
+                  <div class="uploaded-file-block" *ngIf="customer.pancardImageUrlExisting">
+                    <a href="{{customer.pancardImageUrlExisting}}" target="_blank">Click To View</a>
+                  </div>
+                  <input #pancardImageFile type="file" (change)="onPanCLUpload($event)" accept="image/*" />
                 </div>
               </div>
 
@@ -157,7 +163,11 @@
                   <div>
                     <label>Aadharcard</label>
                   </div>
-                  <input #aadharcardImageFile type="file" (change)="onAadharCLUpload($event)" accept="image/*,application/pdf" />
+                  <div class="uploaded-file-block" *ngIf="customer.aadharImageUrlExisting">
+                    <a href="{{customer.aadharImageUrlExisting}}" target="_blank">Click To View</a>
+                  </div>
+                  <input #aadharcardImageFile type="file" (change)="onAadharCLUpload($event)" accept="image/*" />
+
                 </div>
               </div>
 
@@ -166,8 +176,10 @@
                   <div>
                     <label>Residential Latest Bill</label>
                   </div>
-
-                  <input #residentialLatestBillImageFile type="file" (change)="onResidentialBillCLUpload($event)" accept="image/*,application/pdf" />
+                  <div class="uploaded-file-block" *ngIf="customer.residentialImageUrlExisting">
+                    <a href="{{customer.residentialImageUrlExisting}}" target="_blank">Click To View</a>
+                  </div>
+                  <input #residentialLatestBillImageFile type="file" (change)="onResidentialBillCLUpload($event)" accept="image/*" />
                 </div>
               </div>
 
@@ -175,19 +187,19 @@
                 <div class="form-group">
                   <div>
                     <label>Property Tax Receipt</label>
+                 </div>
+                  <div class="uploaded-file-block" *ngIf="customer.propertyTaxtReceptImageUrlExisting">
+                    <a href="{{customer.propertyTaxtReceptImageUrlExisting}}" target="_blank">Click To View</a>
                   </div>
-
-                  <input #propertyTaxReceiptImageFile type="file" (change)="onPropertyTaxCLUpload($event)" accept="image/*,application/pdf" />
+                  <input #propertyTaxReceiptImageFile type="file" (change)="onPropertyTaxCLUpload($event)" accept="image/*" />
                 </div>
               </div>
 
             </div>
             <div class="row mt-4 mb-4">
               <div class="col-12">
-                <button *ngIf="!product.id"
-                  [disabled]="f.invalid || !customer.name || disableButton" type="submit"
-                  class="btn green-btn" (click)="onClickSave()">Save Customer</button>
-                <button *ngIf="product._id" [disabled]="f.invalid || !customer.name" type="submit"
+
+                <button *ngIf="product.id" [disabled]="f.invalid || !customer.name || disableButton" type="submit"
                   class="btn green-btn" (click)="onClickSave()">Update Customer</button>
                 <button type="button" class="btn gray-btn ml-4" (click)="onClickCancel()">Cancel</button>
               </div>

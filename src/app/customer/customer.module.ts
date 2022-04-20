@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CustomerManagementComponent } from './customer-management/customer-management.component';
 import { AddCustomerComponent } from './add-customer/add-customer.component';
+import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { SharedModule } from '../shared/shared.module';
 import { SharedPaginationModule } from 'src/app/shared-components/shared-pagination/shared-pagination.module';
 import { CustomerRoutingModule } from './customer-routing.module';
@@ -13,7 +14,8 @@ import { NgxSummernoteModule } from 'ngx-summernote';
 @NgModule({
   declarations: [
     CustomerManagementComponent,
-    AddCustomerComponent
+    AddCustomerComponent,
+    EditCustomerComponent
   ],
   imports: [
     SharedModule,
@@ -26,7 +28,8 @@ import { NgxSummernoteModule } from 'ngx-summernote';
     NgxSummernoteModule
   ],
   providers: [
-    AddCustomerComponent
+    AddCustomerComponent,
+    EditCustomerComponent
   ],
 })
 export class CustomerModule {}

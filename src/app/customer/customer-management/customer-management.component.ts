@@ -2,10 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CustomerService } from 'src/app/services/customer.service';
 import { CommonHelper } from 'src/app/helpers/common.helper';
 import { ToastMessageService } from 'src/app/services/toast-message.service';
-import { Subject } from 'rxjs';
+import { remove } from 'lodash-es';
+import { Subscription, Subject } from 'rxjs';
 import { environment } from "src/environments/environment";
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Router } from '@angular/router';
+import { ConfirmationModalComponent } from 'src/app/modals/confirmation-modal/confirmation-modal.component';
 @Component({
   selector: 'customer-management',
   templateUrl: './customer-management.component.html',
@@ -77,28 +79,28 @@ export class CustomerManagementComponent implements OnInit {
   }
   onClickEditSlider(slider) {
 
-    this.router.navigate(['/customer/edit-customer/'+slider._id]);
+    this.router.navigate(['/customer/edit-customer/'+slider.id]);
   }
   onClickDeleteSlider(slider) {
-    // this.modalRef = this.modalService.show(ConfirmationModalComponent, { class: 'confirmation-modal', backdrop: 'static', keyboard: false });
-    // this.modalRef.content.decision = '';
-    // this.modalRef.content.confirmation_text = "Are you sure to delete this?"
-    // var tempSubObj: Subscription = this.modalService.onHide.subscribe(() => {
-    //   if (this.modalRef.content.decision == "done") {
-    //     this.loading = true;
-    //     this.customerService.deleteProduct(slider._id).subscribe((res: any) => {
-    //       this.loading = false;
-    //       if (res.status == 200) {
-    //         remove(this.table_data, (ub: any) => ub._id == slider._id);
-    //         this._toastMessageService.alert("success", "Product deleted successfully.");
-    //       }
-    //     }, (error) => {
-    //       this.loading = false;
-    //       this.commonHelper.showError(error);
-    //     });
-    //   }
-    //   tempSubObj.unsubscribe();
-    // });
+    this.modalRef = this.modalService.show(ConfirmationModalComponent, { class: 'confirmation-modal', backdrop: 'static', keyboard: false });
+    this.modalRef.content.decision = '';
+    this.modalRef.content.confirmation_text = "Are you sure to delete this?"
+    var tempSubObj: Subscription = this.modalService.onHide.subscribe(() => {
+      if (this.modalRef.content.decision == "done") {
+        this.loading = true;
+        this.customerService.deleteCustomer(slider.id).subscribe((res: any) => {
+          this.loading = false;
+          if (res.status == 200) {
+            remove(this.table_data, (ub: any) => ub.id == slider.id);
+            this._toastMessageService.alert("success", "Customer deleted successfully.");
+          }
+        }, (error) => {
+          this.loading = false;
+          this.commonHelper.showError(error);
+        });
+      }
+      tempSubObj.unsubscribe();
+    });
   }
 
 }
