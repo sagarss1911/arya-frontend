@@ -10456,7 +10456,7 @@ a:focus {
 }
 
 .bg-gradient-primary {
-    background-color: #5D009B;
+    background-color: #015B75;
     background-size: cover;
     border-radius: 0 40px 0 0;
 }
@@ -11470,7 +11470,7 @@ input[type=date]:focus::-webkit-datetime-edit {
     color: #fff;
 }
 
-.sidebar-dark .nav-item .nav-link:active,
+/* .sidebar-dark .nav-item .nav-link:active,
 .sidebar-dark .nav-item .nav-link:focus,
 .sidebar-dark .nav-item .nav-link:hover {
     color: #fff;
@@ -11478,7 +11478,7 @@ input[type=date]:focus::-webkit-datetime-edit {
     border-radius: 0 30px 30px 0;
     position: relative;
     transition: all .5s ease-in-out;
-}
+} */
 
 .sidebar-dark .nav-item .nav-link:active i,
 .sidebar-dark .nav-item .nav-link:focus i,
@@ -11492,7 +11492,7 @@ input[type=date]:focus::-webkit-datetime-edit {
 
 .sidebar-dark .nav-item .nav-link.active {
     color: #000;
-    background: #FDBB26;
+    background: #fff;
     border-radius: 0 30px 30px 0;
     position: relative;
 }

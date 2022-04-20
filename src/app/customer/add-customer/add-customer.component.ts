@@ -197,6 +197,7 @@ export class AddCustomerComponent implements OnInit {
     let params = {
       name: this.customer.name,
       address: this.customer.address,
+      office_address: this.customer.office_address,
       birthdate: this.customer.birthdate,
       mobile_no: this.customer.mobile_no,
       email: this.customer.email,
@@ -212,11 +213,11 @@ export class AddCustomerComponent implements OnInit {
     data.append("body", JSON.stringify(params));
     this.loading = true;
     this.customerService.addCustomer(data).subscribe((res: any) => {
-      this.loading = false;
       if (res.status == 200 && res.data) {
         this._toastMessageService.alert("success", "Customer added successfully.");
         this.router.navigate(['/customer']);
       }
+      this.loading = false;
     }, (error) => {
       this.loading = false;
       this.commonHelper.showError(error);

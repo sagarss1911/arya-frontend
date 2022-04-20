@@ -27,11 +27,22 @@
               <div class="col-12 col-xl-3 col-md-4">
                 <div class="form-group">
                   <label>Address <span class="c-red">*</span></label>
-                  <input type="text" class="form-control" id="address" placeholder="Enter Residential/Office Address" name="address"
+                  <input type="text" class="form-control" id="address" placeholder="Enter Residential Address" name="address"
                     #address="ngModel" [(ngModel)]="customer.address" required
                     [class.is-invalid]="f.submitted && address.invalid">
                   <div class="alert alert-danger" *ngIf="(address.touched || f.submitted) && address.invalid">
-                    <p>Residential/Office Address can't be blank.</p>
+                    <p>Residential Address can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label>Office Address <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="office_address" placeholder="Enter Residential Address" name="office_address"
+                    #office_address="ngModel" [(ngModel)]="customer.office_address" required
+                    [class.is-invalid]="f.submitted && office_address.invalid">
+                  <div class="alert alert-danger" *ngIf="(office_address.touched || f.submitted) && office_address.invalid">
+                    <p>Office Address can't be blank.</p>
                   </div>
                 </div>
               </div>
@@ -114,7 +125,7 @@
                 </div>
               </div>
 
-              <div class="col-12 col-xl-3 col-md-4">
+              <div class="col-12 col-xl-6 col-md-4">
                 <div class="form-group">
                   <label for="mothername">Notes </label>
                   <textarea class="form-control" id="notes" placeholder="Note Here" name="notes"
