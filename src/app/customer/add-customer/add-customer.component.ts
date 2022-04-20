@@ -210,7 +210,6 @@ export class AddCustomerComponent implements OnInit {
       remaining_url: this.remaining_url
     }
     data.append("body", JSON.stringify(params));
-    console.log(params)
     this.loading = true;
     this.customerService.addCustomer(data).subscribe((res: any) => {
       this.loading = false;
