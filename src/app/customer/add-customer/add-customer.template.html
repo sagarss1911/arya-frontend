@@ -1,0 +1,295 @@
+<div class="container-fluid management-tab">
+  <ngx-loading [show]="loading"
+    [config]="{ backdropBorderRadius: '14px' ,fullScreenBackdrop:true,backdropBackgroundColour:'rgba(255,255,255, 0.01)',primaryColour:'#005eff',secondaryColour:'#005eff',tertiaryColour:'#005eff'}">
+  </ngx-loading>
+  <div class="row section-box">
+    <div class="col-12">
+      {{ type | titlecase }} customer
+      <div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <form #f="ngForm" novalidate autocomplete="off">
+            <div class="row">
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="customername">Name <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="name" placeholder="Enter Your Name" name="name"
+                    #name="ngModel" [(ngModel)]="customer.name" required
+                    [class.is-invalid]="f.submitted && name.invalid">
+                  <div class="alert alert-danger" *ngIf="(name.touched || f.submitted) && name.invalid">
+                    <p>Name can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label>Address <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="address" placeholder="Enter Residential/Office Address" name="address"
+                    #address="ngModel" [(ngModel)]="customer.address" required
+                    [class.is-invalid]="f.submitted && address.invalid">
+                  <div class="alert alert-danger" *ngIf="(address.touched || f.submitted) && address.invalid">
+                    <p>Residential/Office Address can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="birthdate">Birth date <span class="c-red">*</span></label>
+                  <p-calendar id="birthdate" name="birthdate" #birthdate="ngModel" placeholder="Select Birthdate" [(ngModel)]="customer.birthdate" dateFormat="dd/mm/yy" [maxDate]="maxDate" inputId="min-max"></p-calendar>
+                  <div class="alert alert-danger" *ngIf="(birthdate.touched || f.submitted) && birthdate.invalid">
+                    <p>Birthdate can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="loginMobile">Mobile No. <span class="text-danger">*</span></label>
+                  <input type="tel" class="form-control" id="mobile_no" name="mobile_no" placeholder="Enter Mobile Number" [(ngModel)]="customer.mobile_no" #mobile_no="ngModel" maxlength="10" minlength="9" pattern="^((\\+91-?)|0)?[0-9]{10}$" required />
+                  <div class="alert alert-danger" *ngIf="mobile_no.touched && mobile_no.invalid">
+                      <p *ngIf="mobile_no.errors && mobile_no.errors?.required">Phone can't be blank.</p>
+                      <p *ngIf="mobile_no.errors && mobile_no.errors?.pattern">Please Check the phone number again.</p>
+                  </div>
+              </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label class="userEmail">Email ID <span class="c-red">*</span></label>
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Enter Email" [(ngModel)]="customer.email" #email="ngModel" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" required>
+                  <div class="alert alert-danger" *ngIf="(email.touched && email.invalid)">
+                      <p *ngIf="(email.errors && email.errors?.required)">Email can't be blank.</p>
+                      <p *ngIf="(email.errors && email.errors?.pattern)">Please Check the Email again.</p>
+                  </div>
+              </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectiontext">Education </label>
+                  <input type="text" class="form-control" id="education" placeholder="Enter Education" name="education"
+                    #education="ngModel" [(ngModel)]="customer.education">
+                  <!-- <div class="alert alert-danger" *ngIf="(education.touched || f.submitted) && education.invalid">
+                    <p>Education can't be blank.</p>
+                  </div> -->
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="collectiontext">Experience <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="experience" placeholder="Enter Experience" name="experience"
+                    #experience="ngModel" [(ngModel)]="customer.experience" required
+                    [class.is-invalid]="f.submitted && experience.invalid">
+                  <div class="alert alert-danger" *ngIf="(experience.touched || f.submitted) && experience.invalid">
+                    <p>Experience can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="maritalstatus">Select Marital Status <span class="c-red">*</span></label>
+                  <p-dropdown name="marital_status" #marital_status="ngModel" [options]="marital_status_option" placeholder="Select Marital Status" [(ngModel)]="customer.marital_status" optionLable="marital_status_option">
+                </p-dropdown>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="spousename">Spouse Name </label>
+                  <input type="text" class="form-control" id="spouse_name" placeholder="Enter Spouse Name" name="spouse_name"
+                    #spouse_name="ngModel" [(ngModel)]="customer.spouse_name">
+                    <div class="alert alert-danger" *ngIf="(spouse_name.touched || f.submitted) && spouse_name.invalid">
+                      <p>Spouse Name can't be blank.</p>
+                    </div>
+                </div>
+              </div>
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="mothername">Mother Name <span class="c-red">*</span></label>
+                  <input type="text" class="form-control" id="mother_name" placeholder="Enter Mother Name" name="mother_name"
+                    #mother_name="ngModel" [(ngModel)]="customer.mother_name" required
+                    [class.is-invalid]="f.submitted && mother_name.invalid">
+                  <div class="alert alert-danger" *ngIf="(mother_name.touched || f.submitted) && mother_name.invalid">
+                    <p>Mother Name can't be blank.</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-12 col-xl-3 col-md-4">
+                <div class="form-group">
+                  <label for="mothername">Notes </label>
+                  <textarea class="form-control" id="notes" placeholder="Note Here" name="notes"
+                  #notes="ngModel" [(ngModel)]="customer.notes"></textarea>
+                </div>
+              </div>
+
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Photo</label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="customer.customerImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="customer.customerImageUrl" /></div>
+                      <div class="close-btn-wrapper" (click)="clearCLFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="customer.image && !customer.customerImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="base_url+'/'+customer.image" /></div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="customerImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #customerImageFile type="file" (change)="onCLUpload($event)" accept="image/*"
+                      style="display: none" />
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Pancard</label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="customer.pancardImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="customer.pancardImageUrl" /></div>
+                      <div class="close-btn-wrapper" (click)="panClearCLFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="customer.image && !customer.pancardImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="base_url+'/'+customer.image" /></div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="pancardImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #pancardImageFile type="file" (change)="onPanCLUpload($event)" accept="image/*"
+                      style="display: none" />
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Aadharcard</label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="customer.aadharImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="customer.aadharImageUrl" /></div>
+                      <div class="close-btn-wrapper" (click)="aadharClearCLFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="customer.image && !customer.aadharImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="base_url+'/'+customer.image" /></div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="aadharcardImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #aadharcardImageFile type="file" (change)="onAadharCLUpload($event)" accept="image/*"
+                      style="display: none" />
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Residential Latest Bill</label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="customer.residentialImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="customer.residentialImageUrl" /></div>
+                      <div class="close-btn-wrapper" (click)="residentialBillClearCLFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="customer.image && !customer.residentialImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="base_url+'/'+customer.image" /></div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="residentialLatestBillImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #residentialLatestBillImageFile type="file" (change)="onResidentialBillCLUpload($event)" accept="image/*"
+                      style="display: none" />
+                  </button>
+                </div>
+              </div>
+
+              <div class="col-12 ">
+                <div class="form-group">
+                  <div>
+                    <label>Property Tax Receipt</label>
+                  </div>
+
+                  <div class="uploaded-file-block" *ngIf="customer.propertyTaxtReceptImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="customer.propertyTaxtReceptImageUrl" /></div>
+                      <div class="close-btn-wrapper" (click)="propertyTaxClearCLFile()"><i class="fa fa-times-circle"
+                          aria-hidden="true"></i></div>
+                    </div>
+                  </div>
+                  <div class="uploaded-file-block" *ngIf="customer.image && !customer.propertyTaxtReceptImageUrl">
+                    <div class="file-detail-wrap">
+                      <div class="uimage"><img width="100px" [src]="base_url+'/'+customer.image" /></div>
+
+                    </div>
+                  </div>
+                  <button type="button" class="btn dark-blue-btn" (click)="propertyTaxReceiptImageFile.click()">
+                    <div>
+                      <i class="fa fa-plus" aria-hidden="true"></i>
+                      Upload
+                    </div>
+                    <input #propertyTaxReceiptImageFile type="file" (change)="onPropertyTaxCLUpload($event)" accept="image/*"
+                      style="display: none" />
+                  </button>
+                </div>
+              </div>
+
+            </div>
+            <div class="row mt-4 mb-4">
+              <div class="col-12">
+                <button *ngIf="!product._id"
+                  [disabled]="f.invalid || !customer.name" type="submit"
+                  class="btn green-btn" (click)="onClickSave()">Save Customer</button>
+                <button *ngIf="product._id" [disabled]="f.invalid || !customer.name" type="submit"
+                  class="btn green-btn" (click)="onClickSave()">Update Customer</button>
+                <button type="button" class="btn gray-btn ml-4" (click)="onClickCancel()">Cancel</button>
+              </div>
+            </div>
+          </form>
+          <div>
+          </div>
+
+
+
+
+          <app-footer></app-footer>
+        </div>
+        <!-- End of Footer -->

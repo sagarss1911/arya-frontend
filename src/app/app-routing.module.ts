@@ -12,9 +12,8 @@ const routes: Routes = [
     canActivateChild: [AuthGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: 'dashboard', loadChildren: () => import('src/app/dashboard/dashboard.module').then(m => m.DashboardModule) },          
-    
-      
+      { path: 'dashboard', loadChildren: () => import('src/app/dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: 'customer', loadChildren: () => import('src/app/customer/customer.module').then(m => m.CustomerModule) }
     ]
   },
   { path: '**', component: NotfoundComponent }
