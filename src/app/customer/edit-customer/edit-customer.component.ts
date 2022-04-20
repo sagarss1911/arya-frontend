@@ -224,7 +224,7 @@ export class EditCustomerComponent implements OnInit {
       data.append('residential_latest_bill', this.customer.residentialLatestBillImageFile);
     }
     if (this.customer.propertyTaxReceiptImageFile) {
-      data.append('property_tax_receipt', this.propertyTaxReceiptImageFile);
+      data.append('property_tax_receipt', this.customer.propertyTaxReceiptImageFile);
     }
     let params = {
       name: this.customer.name,
